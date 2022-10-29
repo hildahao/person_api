@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="person_api.css"></link>
+    <script src="p5.js"></script>
+    <script src="sketch.js"></script>
+    <title>chart</title>
+  </head>
+  <body>
+
+    <div class = "title">
+    <h1>WHO IS </br>THE MOST WATCHED PERSON </br>IN THE WORLD?<span id="title"></span></h1>
+    </div>
+
+      <p id = "fm">
+        We use wiki everyday. found a handsome guy in Tv show? Let's search him in wiki. 
+        A famous people died but you don't know who she is? Ok, we can use wiki to learn her stories. 
+        Oh Google Home Page is celebrating a man‘ birth, but who is he? Don't worry, we can use wiki to find the answer. 
+        Without even noticing, you’re always using wiki to get to know some people. 
+        But have you ever wondered, who receives most attention in wiki?
+      </p>
+      <div id = "fpic" >
+      </div>
+      
+      <p id = "ref">Reference: </br>
+         Yu, A. Z., et al. (2016). Pantheon 1.0, a manually verified dataset of globally famous biographies. Scientific Data 2:150075. doi: 10.1038/sdata.2015.75
+      </p>
+
+  <script>
+
+  const api_url = 'https://api.pantheon.world/person';
+  async function getPerson() {
+  const response = await fetch(api_url);
+  const data = await response.json();
+  //console.log(data); //shows all data，（need to wait for a while）
+  
+  function getGender(){
+    for(let i=1; i<299; i++){
+    console.log(data[i].gender)
+    }
+  }
+  getGender();// you can now see all the gender information
+
+}
+
+  getPerson();
+
+  //p5
+    function setup() {
+      var myCanvas = createCanvas(600, 3200);
+      myCanvas.parent("fpic");
+      //myCanvas.center();
+      
+      //textFont(font);
+      textSize(20);
+      textAlign(CENTER, CENTER);
+}
+    // 1：198
+   
+    function draw() {
+      let f = color('#7d0633')
+      let m = color('#CECCB0')
+      noStroke();
+      if ((mouseX > 100) && (mouseX < 500) &&
+        (mouseY > 0) && (mouseY < 2960)) {
+        fill(1);
+        text('Male - 196',300,10);
+      } else {
+        fill(m);
+      }
+      rect(100, 20, 400, 2960);
+
+      if ((mouseX > 100) && (mouseX < 500) &&
+        (mouseY > 2980) && (mouseY < 3000)) {
+        fill(1);
+        //fill(0, 102, 153, 51);
+        //text('2 females',300,3000);
+        function drawWords() {
+          text('Female - 2',300,3020);
+        }
+        drawWords();
+      } else {
+        fill(f);
+      }
+      rect(100, 2980, 400, 20); // y，x，heng，zong
+    }
+    
+    
+
+  
+  </script>
+
+  <footer class = "footer">Designers: </footer>
+  </body>
+ 
+</html>
